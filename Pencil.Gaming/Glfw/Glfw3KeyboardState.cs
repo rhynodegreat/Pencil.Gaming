@@ -38,8 +38,7 @@ namespace Pencil.Gaming {
 			}
 		}
 
-		private KeyboardState() {
-		}
+        private KeyboardState() { }
 
 		public static KeyboardState GetState(GlfwWindowPtr window) {
 			KeyboardState result = new KeyboardState();

@@ -176,19 +176,6 @@ namespace Pencil.Gaming.MathUtils {
 		}
 
 		/// <summary>
-		/// Gets an approximation of the vector length (magnitude).
-		/// </summary>
-		/// <remarks>
-		/// This property uses an approximation of the square root function to calculate vector magnitude, with
-		/// an upper error bound of 0.001.
-		/// </remarks>
-		/// <see cref="Length"/>
-		/// <seealso cref="LengthSquared"/>
-		public float LengthFast {
-			get { return 1.0f / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z); }
-		}
-
-		/// <summary>
 		/// Gets the square of the vector length (magnitude).
 		/// </summary>
 		/// <remarks>
@@ -206,16 +193,6 @@ namespace Pencil.Gaming.MathUtils {
 		/// </summary>
 		public void Normalize() {
 			float scale = 1.0f / this.Length;
-			X *= scale;
-			Y *= scale;
-			Z *= scale;
-		}
-
-		/// <summary>
-		/// Scales the Vector3 to approximately unit length.
-		/// </summary>
-		public void NormalizeFast() {
-			float scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
 			X *= scale;
 			Y *= scale;
 			Z *= scale;
@@ -470,31 +447,6 @@ namespace Pencil.Gaming.MathUtils {
 		}
 
 		/// <summary>
-		/// Scale a vector to approximately unit length
-		/// </summary>
-		/// <param name="vec">The input vector</param>
-		/// <returns>The normalized vector</returns>
-		public static Vector3 NormalizeFast(Vector3 vec) {
-			float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-			vec.X *= scale;
-			vec.Y *= scale;
-			vec.Z *= scale;
-			return vec;
-		}
-
-		/// <summary>
-		/// Scale a vector to approximately unit length
-		/// </summary>
-		/// <param name="vec">The input vector</param>
-		/// <param name="result">The normalized vector</param>
-		public static void NormalizeFast(ref Vector3 vec, out Vector3 result) {
-			float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-			result.X = vec.X * scale;
-			result.Y = vec.Y * scale;
-			result.Z = vec.Z * scale;
-		}
-
-		/// <summary>
 		/// Calculate the dot (scalar) product of two vectors
 		/// </summary>
 		/// <param name="left">First operand</param>
@@ -606,11 +558,11 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <returns>The transformed vector</returns>
-		public static Vector3 TransformVector(Vector3 vec, Matrix mat) {
+		public static Vector3 TransformVector(Vector3 vec, Matrix4x4 mat) {
 			Vector3 v;
-			v.X = Vector3.Dot(vec, new Vector3(mat.Column0));
-			v.Y = Vector3.Dot(vec, new Vector3(mat.Column1));
-			v.Z = Vector3.Dot(vec, new Vector3(mat.Column2));
+			v.X = Vector3.Dot(vec, new Vector3(mat.Column1));
+			v.Y = Vector3.Dot(vec, new Vector3(mat.Column2));
+			v.Z = Vector3.Dot(vec, new Vector3(mat.Column3));
 			return v;
 		}
 
@@ -620,18 +572,18 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <param name="result">The transformed vector</param>
-		public static void TransformVector(ref Vector3 vec, ref Matrix mat, out Vector3 result) {
-			result.X = vec.X * mat.Row0.X +
-				vec.Y * mat.Row1.X +
-				vec.Z * mat.Row2.X;
+		public static void TransformVector(ref Vector3 vec, ref Matrix4x4 mat, out Vector3 result) {
+			result.X = vec.X * mat.M11 +
+				vec.Y * mat.M21 +
+				vec.Z * mat.M31;
 
-			result.Y = vec.X * mat.Row0.Y +
-				vec.Y * mat.Row1.Y +
-				vec.Z * mat.Row2.Y;
+			result.Y = vec.X * mat.M12 +
+				vec.Y * mat.M22 +
+				vec.Z * mat.M32;
 
-			result.Z = vec.X * mat.Row0.Z +
-				vec.Y * mat.Row1.Z +
-				vec.Z * mat.Row2.Z;
+			result.Z = vec.X * mat.M13 +
+				vec.Y * mat.M23 +
+				vec.Z * mat.M33;
 		}
 
 		/// <summary>Transform a Normal by the given Matrix</summary>
@@ -642,7 +594,7 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="norm">The normal to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <returns>The transformed normal</returns>
-		public static Vector3 TransformNormal(Vector3 norm, Matrix mat) {
+		public static Vector3 TransformNormal(Vector3 norm, Matrix4x4 mat) {
 			mat.Invert();
 			return TransformNormalInverse(norm, mat);
 		}
@@ -655,8 +607,8 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="norm">The normal to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <param name="result">The transformed normal</param>
-		public static void TransformNormal(ref Vector3 norm, ref Matrix mat, out Vector3 result) {
-			Matrix Inverse = Matrix.Invert(mat);
+		public static void TransformNormal(ref Vector3 norm, ref Matrix4x4 mat, out Vector3 result) {
+			Matrix4x4 Inverse = Matrix4x4.Invert(mat);
 			Vector3.TransformNormalInverse(ref norm, ref Inverse, out result);
 		}
 
@@ -668,7 +620,7 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="norm">The normal to transform</param>
 		/// <param name="invMat">The inverse of the desired transformation</param>
 		/// <returns>The transformed normal</returns>
-		public static Vector3 TransformNormalInverse(Vector3 norm, Matrix invMat) {
+		public static Vector3 TransformNormalInverse(Vector3 norm, Matrix4x4 invMat) {
 			Vector3 n;
 			n.X = Vector3.Dot(norm, new Vector3(invMat.Row0));
 			n.Y = Vector3.Dot(norm, new Vector3(invMat.Row1));
@@ -684,29 +636,29 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="norm">The normal to transform</param>
 		/// <param name="invMat">The inverse of the desired transformation</param>
 		/// <param name="result">The transformed normal</param>
-		public static void TransformNormalInverse(ref Vector3 norm, ref Matrix invMat, out Vector3 result) {
-			result.X = norm.X * invMat.Row0.X +
-				norm.Y * invMat.Row0.Y +
-				norm.Z * invMat.Row0.Z;
+		public static void TransformNormalInverse(ref Vector3 norm, ref Matrix4x4 invMat, out Vector3 result) {
+			result.X = norm.X * invMat.M11 +
+				norm.Y * invMat.M12 +
+				norm.Z * invMat.M13;
 
-			result.Y = norm.X * invMat.Row1.X +
-				norm.Y * invMat.Row1.Y +
-				norm.Z * invMat.Row1.Z;
+			result.Y = norm.X * invMat.M21 +
+				norm.Y * invMat.M22 +
+				norm.Z * invMat.M23;
 
-			result.Z = norm.X * invMat.Row2.X +
-				norm.Y * invMat.Row2.Y +
-				norm.Z * invMat.Row2.Z;
+			result.Z = norm.X * invMat.M31 +
+				norm.Y * invMat.M32 +
+				norm.Z * invMat.M33;
 		}
 
 		/// <summary>Transform a Position by the given Matrix</summary>
 		/// <param name="pos">The position to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <returns>The transformed position</returns>
-		public static Vector3 TransformPosition(Vector3 pos, Matrix mat) {
+		public static Vector3 TransformPosition(Vector3 pos, Matrix4x4 mat) {
 			Vector3 p;
-			p.X = Vector3.Dot(pos, new Vector3(mat.Column0)) + mat.Row3.X;
-			p.Y = Vector3.Dot(pos, new Vector3(mat.Column1)) + mat.Row3.Y;
-			p.Z = Vector3.Dot(pos, new Vector3(mat.Column2)) + mat.Row3.Z;
+			p.X = Vector3.Dot(pos, new Vector3(mat.Column1)) + mat.M41;
+			p.Y = Vector3.Dot(pos, new Vector3(mat.Column2)) + mat.M42;
+			p.Z = Vector3.Dot(pos, new Vector3(mat.Column3)) + mat.M43;
 			return p;
 		}
 
@@ -714,28 +666,28 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="pos">The position to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <param name="result">The transformed position</param>
-		public static void TransformPosition(ref Vector3 pos, ref Matrix mat, out Vector3 result) {
-			result.X = pos.X * mat.Row0.X +
-				pos.Y * mat.Row1.X +
-				pos.Z * mat.Row2.X +
-				mat.Row3.X;
+		public static void TransformPosition(ref Vector3 pos, ref Matrix4x4 mat, out Vector3 result) {
+			result.X = pos.X * mat.M11 +
+				pos.Y * mat.M21 +
+				pos.Z * mat.M31 +
+				mat.M41;
 
-			result.Y = pos.X * mat.Row0.Y +
-				pos.Y * mat.Row1.Y +
-				pos.Z * mat.Row2.Y +
-				mat.Row3.Y;
+			result.Y = pos.X * mat.M12 +
+				pos.Y * mat.M22 +
+				pos.Z * mat.M32 +
+				mat.M42;
 
-			result.Z = pos.X * mat.Row0.Z +
-				pos.Y * mat.Row1.Z +
-				pos.Z * mat.Row2.Z +
-				mat.Row3.Z;
+			result.Z = pos.X * mat.M13 +
+				pos.Y * mat.M23 +
+				pos.Z * mat.M33 +
+				mat.M43;
 		}
 
 		/// <summary>Transform a Vector by the given Matrix</summary>
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <returns>The transformed vector</returns>
-		public static Vector3 Transform(Vector3 vec, Matrix mat) {
+		public static Vector3 Transform(Vector3 vec, Matrix4x4 mat) {
 			Vector3 result;
 			Transform(ref vec, ref mat, out result);
 			return result;
@@ -745,7 +697,7 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <param name="result">The transformed vector</param>
-		public static void Transform(ref Vector3 vec, ref Matrix mat, out Vector3 result) {
+		public static void Transform(ref Vector3 vec, ref Matrix4x4 mat, out Vector3 result) {
 			Vector4 v4 = new Vector4(vec.X, vec.Y, vec.Z, 1.0f);
 			Vector4.Transform(ref v4, ref mat, out v4);
 			result = v4.Xyz;
@@ -785,7 +737,7 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <returns>The transformed vector</returns>
-		public static Vector3 TransformPerspective(Vector3 vec, Matrix mat) {
+		public static Vector3 TransformPerspective(Vector3 vec, Matrix4x4 mat) {
 			Vector3 result;
 			TransformPerspective(ref vec, ref mat, out result);
 			return result;
@@ -795,7 +747,7 @@ namespace Pencil.Gaming.MathUtils {
 		/// <param name="vec">The vector to transform</param>
 		/// <param name="mat">The desired transformation</param>
 		/// <param name="result">The transformed vector</param>
-		public static void TransformPerspective(ref Vector3 vec, ref Matrix mat, out Vector3 result) {
+		public static void TransformPerspective(ref Vector3 vec, ref Matrix4x4 mat, out Vector3 result) {
 			Vector4 v = new Vector4(vec, 1);
 			Vector4.Transform(ref v, ref mat, out v);
 			result.X = v.X / v.W;

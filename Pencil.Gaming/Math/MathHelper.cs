@@ -36,59 +36,9 @@ namespace Pencil.Gaming.MathUtils {
 		public const float Pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930382f;
 
 		/// <summary>
-		/// Defines the value of Pi divided by two as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float PiOver2 = Pi / 2;
-
-		/// <summary>
-		/// Defines the value of Pi divided by three as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float PiOver3 = Pi / 3;
-
-		/// <summary>
-		/// Definesthe value of  Pi divided by four as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float PiOver4 = Pi / 4;
-
-		/// <summary>
-		/// Defines the value of Pi divided by six as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float PiOver6 = Pi / 6;
-
-		/// <summary>
 		/// Defines the value of tau as a <see cref="System.Single"/>.
 		/// </summary>
 		public const float Tau = 2 * Pi;
-
-		/// <summary>
-		/// Defines the value of tau divided by two as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float TauOver2 = Pi;
-
-		/// <summary>
-		/// Defines the value of tau divided by four as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float TauOver4 = Tau / 4f;
-
-		/// <summary>
-		/// Defines the value of tau divided by six as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float TauOver6 = Tau / 6f;
-	   
-		/// <summary>
-		/// Defines the value of tau divided by eight as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float TauOver8 = Tau / 8f;
-
-		/// <summary>
-		/// Defines the value of tau divided by twelve as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float TauOver12 = Tau / 12f;
-
-		/// <summary>
-		/// Defines the value of Pi multiplied by 3 and divided by two as a <see cref="System.Single"/>.
-		/// </summary>
-		public const float ThreePiOver2 = 3 * Pi / 2;
 
 		/// <summary>
 		/// Defines the value of E as a <see cref="System.Single"/>.
@@ -176,53 +126,6 @@ namespace Pencil.Gaming.MathUtils {
 		/// <returns>n! / (k! * (n - k)!)</returns>
 		public static long BinomialCoefficient(int n, int k) {
 			return Factorial(n) / (Factorial(k) * Factorial(n - k));
-		}
-
-		/// <summary>
-		/// Returns an approximation of the inverse square root of left number.
-		/// </summary>
-		/// <param name="x">A number.</param>
-		/// <returns>An approximation of the inverse square root of the specified number, with an upper error bound of 0.001</returns>
-		/// <remarks>
-		/// This is an improved implementation of the the method known as Carmack's inverse square root
-		/// which is found in the Quake III source code. This implementation comes from
-		/// http://www.codemaestro.com/reviews/review00000105.html. For the history of this method, see
-		/// http://www.beyond3d.com/content/articles/8/
-		/// </remarks>
-		public static float InverseSqrtFast(float x) {
-			unsafe {
-				float xhalf = 0.5f * x;
-				int i = *(int*)&x;			  // Read bits as integer.
-				i = 0x5f375a86 - (i >> 1);	  // Make an initial guess for Newton-Raphson approximation
-				x = *(float*)&i;				// Convert bits back to float
-				x = x * (1.5f - xhalf * x * x); // Perform left single Newton-Raphson step.
-				return x;
-			}
-		}
-
-		/// <summary>
-		/// Returns an approximation of the inverse square root of left number.
-		/// </summary>
-		/// <param name="x">A number.</param>
-		/// <returns>An approximation of the inverse square root of the specified number, with an upper error bound of 0.001</returns>
-		/// <remarks>
-		/// This is an improved implementation of the the method known as Carmack's inverse square root
-		/// which is found in the Quake III source code. This implementation comes from
-		/// http://www.codemaestro.com/reviews/review00000105.html. For the history of this method, see
-		/// http://www.beyond3d.com/content/articles/8/
-		/// </remarks>
-		public static double InverseSqrtFast(double x) {
-			return InverseSqrtFast((float)x);
-			// FIXME: The following code is wrong. Fix it, to improve precision.
-//			unsafe
-//			{
-//				double xhalf = 0.5f * x;
-//				int i = *(int*)&x;			  // Read bits as integer.
-//				i = 0x5f375a86 - (i >> 1);	  // Make an initial guess for Newton-Raphson approximation
-//				x = *(float*)&i;				// Convert bits back to float
-//				x = x * (1.5f - xhalf * x * x); // Perform left single Newton-Raphson step.
-//				return x;
-//			}
 		}
 
 		/// <summary>

@@ -197,19 +197,6 @@ namespace Pencil.Gaming.MathUtils {
 		}
 
 		/// <summary>
-		/// Gets an approximation of the vector length (magnitude).
-		/// </summary>
-		/// <remarks>
-		/// This property uses an approximation of the square root function to calculate vector magnitude, with
-		/// an upper error bound of 0.001.
-		/// </remarks>
-		/// <see cref="Length"/>
-		/// <seealso cref="LengthSquared"/>
-		public float LengthFast {
-			get { return 1.0f / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W); }
-		}
-
-		/// <summary>
 		/// Gets the square of the vector length (magnitude).
 		/// </summary>
 		/// <remarks>

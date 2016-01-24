@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Compatibility-GLFW2</Configuration>
@@ -102,7 +102,7 @@
     <Compile Include="Graphics\Color4.cs" />
     <Compile Include="Audio\Alc32.cs" />
     <Compile Include="Audio\Alc64.cs" />
-    <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Matrix4x4.cs" />
     <Compile Include="Graphics\GlEnums.cs" />
     <Compile Include="Graphics\AssetLoadException.cs" />
     <Compile Include="Glfw\Glfw2.cs" />
@@ -160,17 +160,7 @@
     <Compile Include="Math\DualQuaternion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Math\" />
-    <Folder Include="Graphics\" />
-    <Folder Include="Glfw\" />
-    <Folder Include="Audio\" />
-    <Folder Include="natives32-glfw2\" />
-    <Folder Include="natives64-glfw2\" />
-    <Folder Include="natives32-glfw3\" />
-    <Folder Include="natives64-glfw3\" />
-    <Folder Include="Scripting\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Pencil.Gaming.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

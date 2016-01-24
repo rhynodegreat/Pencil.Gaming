@@ -70,7 +70,7 @@ namespace Pencil.Gaming.Audio {
 			byte[] data;
 			ALFormat format;
 			uint chunkSize, sampleRate, avgBytesPerSec;
-			short bytesPerSample, bitsPerSample;
+			ushort bytesPerSample, bitsPerSample;
 			AL.Utils.LoadWavExt(wave, out data, out chunkSize, out format, out sampleRate, out avgBytesPerSec, out bytesPerSample, out bitsPerSample);
 
 			Load(data, format, sampleRate, TimeSpan.FromSeconds(data.Length / (float)avgBytesPerSec));

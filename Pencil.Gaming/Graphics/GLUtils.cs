@@ -722,8 +722,8 @@ namespace Pencil.Gaming.Graphics {
 			}
 #endregion
 		
-			public static Vector3 UnProject(Vector3 winCoords, Matrix modelView, Matrix proj, Rectanglei viewport) {
-				Matrix finalMatrix = Matrix.Invert(modelView * proj);
+			public static Vector3 UnProject(Vector3 winCoords, Matrix4x4 modelView, Matrix4x4 proj, Rectanglei viewport) {
+				Matrix4x4 finalMatrix = Matrix4x4.Invert(modelView * proj);
 
 				Vector4 inVec = new Vector4(winCoords, 1f);
 				inVec.X = (inVec.X - viewport.X) / viewport.Width;

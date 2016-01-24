@@ -202,7 +202,9 @@ namespace Pencil.Gaming.Audio {
 		[SuppressUnmanagedCodeSecurity]
 		internal delegate void DistanceModel(int distanceModel);
 
-		internal static Enable alEnable;
+
+#pragma warning disable 0649
+        internal static Enable alEnable;
 		internal static Disable alDisable;
 		internal static IsEnabled alIsEnabled;
 		internal static GetString alGetString;
@@ -279,6 +281,7 @@ namespace Pencil.Gaming.Audio {
 		internal static DopplerVelocity alDopplerVelocity;
 		internal static SpeedOfSound alSpeedOfSound;
 		internal static DistanceModel alDistanceModel;
-	}
+#pragma warning restore 0649
+    }
 }
 

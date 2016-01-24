@@ -286,9 +286,9 @@ namespace Pencil.Gaming.Graphics {
 			GL.Uniform4(location, quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
 		}
 
-		public static void UniformMatrix4(int location, bool transpose, ref Matrix matrix) {
+		public static void UniformMatrix4(int location, bool transpose, ref Matrix4x4 matrix) {
 			unsafe {
-				fixed (float* matrix_ptr = &matrix.Row0.X) {
+				fixed (float* matrix_ptr = &matrix.M11) {
 					GL.UniformMatrix4(location, 1, transpose, matrix_ptr);
 				}
 			}
@@ -872,9 +872,9 @@ namespace Pencil.Gaming.Graphics {
 			}
 		}
 
-		public static void GetFloat(GetPName pname, out Matrix matrix) {
+		public static void GetFloat(GetPName pname, out Matrix4x4 matrix) {
 			unsafe {
-				fixed (Matrix* ptr = &matrix)
+				fixed (Matrix4x4* ptr = &matrix)
 					GetFloat(pname, (float*)ptr);
 			}
 		}
