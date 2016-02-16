@@ -93,7 +93,27 @@ namespace Pencil.Gaming {
 			inner_ptr;
 
 		public readonly static GlfwWindowPtr Null = new GlfwWindowPtr(IntPtr.Zero);
-	}
+
+        public static bool operator == (GlfwWindowPtr a, GlfwWindowPtr b) {
+            return a.inner_ptr == b.inner_ptr;
+        }
+
+        public static bool operator !=(GlfwWindowPtr a, GlfwWindowPtr b) {
+            return a.inner_ptr != b.inner_ptr;
+        }
+
+        public override int GetHashCode() {
+            return inner_ptr.GetHashCode();
+        }
+
+        public override bool Equals(object obj) {
+            if (obj is GlfwWindowPtr) {
+                GlfwWindowPtr other = (GlfwWindowPtr)obj;
+                return this == other;
+            }
+            return false;
+        }
+    }
 
 	#pragma warning restore 0414
 }

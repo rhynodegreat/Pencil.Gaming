@@ -22,6 +22,8 @@
 #endregion
 
 using System;
+using System.Numerics;
+
 using Pencil.Gaming.Audio;
 using Pencil.Gaming.MathUtils;
 

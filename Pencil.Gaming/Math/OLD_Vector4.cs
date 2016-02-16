@@ -31,7 +31,7 @@ namespace Pencil.Gaming.MathUtils {
 	/// The Vector4 structure is suitable for interoperation with unmanaged code requiring four consecutive floats.
 	/// </remarks>
 	[Serializable]
-	[StructLayout(LayoutKind.Sequential)]
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct Vector4 : IEquatable<Vector4> {
 		/// <summary>
 		/// The X component of the Vector4.

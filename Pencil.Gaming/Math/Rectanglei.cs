@@ -25,19 +25,19 @@ namespace Pencil.Gaming.MathUtils {
 
 		public int Top {
 			get {
-				return Y;
+				return Y + Height;
 			}
 			set {
-				Y = value;
+				Y = value - Height;
 			}
 		}
 
 		public int Bottom {
 			get {
-				return Y + Height;
+				return Y;
 			}
 			set {
-				Y = value - Height;
+				Y = value;
 			}
 		}
 
@@ -65,15 +65,20 @@ namespace Pencil.Gaming.MathUtils {
 			Width = width;
 			Height = height;
 		}
-		public Rectanglei(Vector2i pos, int width, int height) : this(pos.X, pos.Y, width, height) {
-		}
-		public Rectanglei(Vector2i pos, Vector2i size) : this(pos, size.X, size.Y) {
-		}
+
+		public Rectanglei(Vector2i pos, int width, int height) : this(pos.X, pos.Y, width, height) { }
+		public Rectanglei(Vector2i pos, Vector2i size) : this(pos, size.X, size.Y) { }
 
 		public bool Intersects(Rectanglei rect) {
 			return !((X >= rect.Right) || (Right <= rect.X) ||
-				(Y >= rect.Bottom) || (Bottom <= rect.Y));
+				(Y >= rect.Top) || (Top <= rect.Y));
 		}
+
+        public bool Contains(Vector2i vec) {
+            return
+                (vec.X >= X && vec.X <= Right &&
+                vec.Y >= Bottom && vec.Y <= Top);
+        }
 	}
 }
 

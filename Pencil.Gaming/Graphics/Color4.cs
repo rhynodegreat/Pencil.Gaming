@@ -28,14 +28,14 @@ using System.Collections.Generic;
 #if !MINIMAL
 using System.Drawing;
 #endif
-using System.Text;
-using System.Xml.Serialization;
+using System.Runtime.InteropServices;
 
 namespace Pencil.Gaming.Graphics {
 	/// <summary>
 	/// Represents a color with 4 floating-point components (R, G, B, A).
 	/// </summary>
 	[Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct Color4 : IEquatable<Color4> {
 		#region Fields
 
@@ -75,20 +75,6 @@ namespace Pencil.Gaming.Graphics {
 			G = g;
 			B = b;
 			A = a;
-		}
-
-		/// <summary>
-		/// Constructs a new Color4 structure from the specified components.
-		/// </summary>
-		/// <param name="r">The red component of the new Color4 structure.</param>
-		/// <param name="g">The green component of the new Color4 structure.</param>
-		/// <param name="b">The blue component of the new Color4 structure.</param>
-		/// <param name="a">The alpha component of the new Color4 structure.</param>
-		public Color4(byte r, byte g, byte b, byte a) {
-			R = r / (float)Byte.MaxValue;
-			G = g / (float)Byte.MaxValue;
-			B = b / (float)Byte.MaxValue;
-			A = a / (float)Byte.MaxValue;
 		}
 
 		#endregion

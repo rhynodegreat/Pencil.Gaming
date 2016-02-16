@@ -36,6 +36,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Reflection.Emit;
 using Pencil.Gaming.MathUtils;
+using System.Numerics;
 
 #endregion
 

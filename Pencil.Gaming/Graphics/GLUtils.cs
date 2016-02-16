@@ -29,8 +29,7 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Numerics;
 using Pencil.Gaming.MathUtils;
 
 namespace Pencil.Gaming.Graphics {
@@ -722,27 +721,27 @@ namespace Pencil.Gaming.Graphics {
 			}
 #endregion
 		
-			public static Vector3 UnProject(Vector3 winCoords, Matrix4x4 modelView, Matrix4x4 proj, Rectanglei viewport) {
-				Matrix4x4 finalMatrix = Matrix4x4.Invert(modelView * proj);
+			//public static Vector3 UnProject(Vector3 winCoords, Matrix4x4 modelView, Matrix4x4 proj, Rectanglei viewport) {
+			//	Matrix4x4 finalMatrix = Matrix4x4.Invert(modelView * proj);
 
-				Vector4 inVec = new Vector4(winCoords, 1f);
-				inVec.X = (inVec.X - viewport.X) / viewport.Width;
-				inVec.Y = (inVec.Y - viewport.Y) / viewport.Height;
+			//	Vector4 inVec = new Vector4(winCoords, 1f);
+			//	inVec.X = (inVec.X - viewport.X) / viewport.Width;
+			//	inVec.Y = (inVec.Y - viewport.Y) / viewport.Height;
 
-				inVec.X = inVec.X * 2 - 1;
-				inVec.Y = inVec.Y * 2 - 1;
-				inVec.Z = inVec.Z * 2 - 1;
+			//	inVec.X = inVec.X * 2 - 1;
+			//	inVec.Y = inVec.Y * 2 - 1;
+			//	inVec.Z = inVec.Z * 2 - 1;
 
-				Vector4 outVec = Vector4.Transform(inVec, finalMatrix);
-				if (Math.Abs(outVec.Z) < 10f * float.Epsilon) {
-					throw new Exception();
-				}
+			//	Vector4 outVec = Vector4.Transform(inVec, finalMatrix);
+			//	if (Math.Abs(outVec.Z) < 10f * float.Epsilon) {
+			//		throw new Exception();
+			//	}
 
-				outVec.X /= outVec.W;
-				outVec.Y /= outVec.W;
-				outVec.Z /= outVec.W;
-				return outVec.Xyz;
-			}
+			//	outVec.X /= outVec.W;
+			//	outVec.Y /= outVec.W;
+			//	outVec.Z /= outVec.W;
+			//	return outVec.Xyz;
+			//}
 		}
 	}
 }

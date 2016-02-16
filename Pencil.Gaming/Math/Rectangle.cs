@@ -1,4 +1,6 @@
 using System;
+using System.Numerics;
+
 using Pencil.Gaming.MathUtils;
 
 namespace Pencil.Gaming.MathUtils {
@@ -25,19 +27,19 @@ namespace Pencil.Gaming.MathUtils {
 
 		public float Top {
 			get {
-				return Y;
+				return Y + Height;
 			}
 			set {
-				Y = value;
+				Y = value - Height;
 			}
 		}
 
 		public float Bottom {
 			get {
-				return Y + Height;
+				return Y;
 			}
 			set {
-				Y = value - Height;
+				Y = value;
 			}
 		}
 
@@ -65,22 +67,19 @@ namespace Pencil.Gaming.MathUtils {
 			Width = width;
 			Height = height;
 		}
-		public Rectangle(Vector2 position, float width, float height) : this(position.X, position.Y, width, height) {
-		}
-		public Rectangle(Vector2 position, Vector2 size) : this(position, size.X, size.Y) {
-		}
+		public Rectangle(Vector2 position, float width, float height) : this(position.X, position.Y, width, height) { }
+		public Rectangle(Vector2 position, Vector2 size) : this(position, size.X, size.Y) { }
 
-		public Rectangle(Rectanglei rect) : this(rect.X, rect.Y, rect.Width, rect.Height) {
-		}
+		public Rectangle(Rectanglei rect) : this(rect.X, rect.Y, rect.Width, rect.Height) { }
 
 		public bool Intersects(Rectangle rect) {
 			return !((X >= rect.Right) || (Right <= rect.X) ||
-				(Y >= rect.Bottom) || (Bottom <= rect.Y));
+				(Y >= rect.Top) || (Top <= rect.Y));
 		}
-		public bool IsVectorEnclosedBy(Vector2 vec) {
+		public bool Contains(Vector2 vec) {
 			return 
 				(vec.X >= X && vec.X <= Right &&
-				vec.Y >= Y && vec.Y <= Bottom);
+				vec.Y >= Bottom && vec.Y <= Top);
 		}
 	}
 }

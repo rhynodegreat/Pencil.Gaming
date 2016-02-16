@@ -217,7 +217,12 @@ namespace Pencil.Gaming {
 	}
 
 	public enum WindowHint {
-		RedBits = 0x21001,
+        Focused = 0x20001,
+        Iconified,
+        Resizeable,
+        Visible,
+        Decorated,
+        RedBits = 0x21001,
 		GreenBits,
 		BlueBits,
 		AlphaBits,
@@ -266,9 +271,9 @@ namespace Pencil.Gaming {
 	}
 
 	public enum CursorMode {
-        CursorNormal = 0x00034001,
-		CursorHidden,
-		CursorCaptured,
+        Normal = 0x00034001,
+		Hidden,
+		Disabled,
 	}
 
 	public enum ConnectionState {

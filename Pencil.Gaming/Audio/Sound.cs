@@ -23,6 +23,8 @@
 
 using System;
 using System.IO;
+using System.Numerics;
+
 using Pencil.Gaming.Audio;
 using Pencil.Gaming.MathUtils;
 
