@@ -21,33 +21,32 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if USE_GLFW3
 using System;
 
 namespace Pencil.Gaming {
-	public static unsafe class Glfw {
+	public static unsafe partial class Glfw {
 		#pragma warning disable 0414
 
 		public static bool Init() {
-			return GlfwDelegates.glfwInit() == 1;
+			return glfwInit() == 1;
 		}
 		public static void Terminate() {
-			GlfwDelegates.glfwTerminate();
+			glfwTerminate();
 		}
 		public static void GetVersion(out int major, out int minor, out int rev) {
-			GlfwDelegates.glfwGetVersion(out major, out minor, out rev);
+			glfwGetVersion(out major, out minor, out rev);
 		}
 		public static string GetVersionString() {
-			return new string(GlfwDelegates.glfwGetVersionString());
+			return new string(glfwGetVersionString());
 		}
 		private static GlfwErrorFun errorCallback;
 		public static GlfwErrorFun SetErrorCallback(GlfwErrorFun cbfun) {
 			errorCallback = cbfun;
-			return GlfwDelegates.glfwSetErrorCallback(cbfun);
+			return glfwSetErrorCallback(cbfun);
 		}
 		public static unsafe GlfwMonitorPtr[] GetMonitors() {
 			int count;
-			GlfwMonitorPtr * array = GlfwDelegates.glfwGetMonitors(out count);
+			GlfwMonitorPtr * array = glfwGetMonitors(out count);
 			GlfwMonitorPtr[] result = new GlfwMonitorPtr[count];
 			for (int i = 0; i < count; ++i) {
 				result[i] = array[i];
@@ -55,20 +54,20 @@ namespace Pencil.Gaming {
 			return result;
 		}
 		public static GlfwMonitorPtr GetPrimaryMonitor() {
-			return GlfwDelegates.glfwGetPrimaryMonitor();
+			return glfwGetPrimaryMonitor();
 		}
 		public static void GetMonitorPos(GlfwMonitorPtr monitor, out int xpos, out int ypos) {
-			GlfwDelegates.glfwGetMonitorPos(monitor, out xpos, out ypos);
+			glfwGetMonitorPos(monitor, out xpos, out ypos);
 		}
 		public static void GetMonitorPhysicalSize(GlfwMonitorPtr monitor, out int width, out int height) {
-			GlfwDelegates.glfwGetMonitorPhysicalSize(monitor, out width, out height);
+			glfwGetMonitorPhysicalSize(monitor, out width, out height);
 		}
 		public static string GetMonitorName(GlfwMonitorPtr monitor) {
-			return new string(GlfwDelegates.glfwGetMonitorName(monitor));
+			return new string(glfwGetMonitorName(monitor));
 		}
 		public static GlfwVidMode[] GetVideoModes(GlfwMonitorPtr monitor) {
 			int count;
-			GlfwVidMode * array = GlfwDelegates.glfwGetVideoModes(monitor, out count);
+			GlfwVidMode * array = glfwGetVideoModes(monitor, out count);
 			GlfwVidMode[] result = new GlfwVidMode[count];
 			for (int i = 0; i < count; ++i) {
 				result[i] = array[i];
@@ -76,7 +75,7 @@ namespace Pencil.Gaming {
 			return result;
 		}
 		public static GlfwVidMode GetVideoMode(GlfwMonitorPtr monitor) {
-            GlfwVidMode* vidMode = GlfwDelegates.glfwGetVideoMode(monitor);
+            GlfwVidMode* vidMode = glfwGetVideoMode(monitor);
             GlfwVidMode returnMode = new GlfwVidMode {
                 RedBits = vidMode->RedBits,
                 GreenBits = vidMode->GreenBits,
@@ -88,11 +87,11 @@ namespace Pencil.Gaming {
             return returnMode;
 		}
 		public static void SetGamma(GlfwMonitorPtr monitor, float gamma) {
-			GlfwDelegates.glfwSetGamma(monitor, gamma);
+			glfwSetGamma(monitor, gamma);
 		}
 		public static void GetGammaRamp(GlfwMonitorPtr monitor, out GlfwGammaRamp ramp) {
 			GlfwGammaRampInternal rampI;
-			GlfwDelegates.glfwGetGammaRamp(monitor, out rampI);
+			glfwGetGammaRamp(monitor, out rampI);
 			uint length = rampI.Length;
 			ramp = new GlfwGammaRamp();
 			ramp.Red = new uint[length];
@@ -110,166 +109,166 @@ namespace Pencil.Gaming {
 		}
 		public static void SetGammaRamp(GlfwMonitorPtr monitor, ref GlfwGammaRamp ramp) {
 			ramp.Length = (uint)ramp.Red.Length;
-			GlfwDelegates.glfwSetGammaRamp(monitor, ref ramp);
+			glfwSetGammaRamp(monitor, ref ramp);
 		}
 		public static void DefaultWindowHints() {
-			GlfwDelegates.glfwDefaultWindowHints();
+			glfwDefaultWindowHints();
 		}
 		public static void WindowHint(WindowHint target, int hint) {
-			GlfwDelegates.glfwWindowHint(target, hint);
+			glfwWindowHint(target, hint);
 		}
 		public static GlfwWindowPtr CreateWindow(int width, int height, string title, GlfwMonitorPtr monitor, GlfwWindowPtr share) {
-			return GlfwDelegates.glfwCreateWindow(width, height, title, monitor, share);
+			return glfwCreateWindow(width, height, title, monitor, share);
 		}
 		public static void DestroyWindow(GlfwWindowPtr window) {
-			GlfwDelegates.glfwDestroyWindow(window);
+			glfwDestroyWindow(window);
 		}
 		public static void GetFramebufferSize(GlfwWindowPtr window, out int width, out int height) {
-			GlfwDelegates.glfwGetFramebufferSize(window, out width, out height);
+			glfwGetFramebufferSize(window, out width, out height);
 		}
 		public static bool WindowShouldClose(GlfwWindowPtr window) {
-			return GlfwDelegates.glfwWindowShouldClose(window) == 1;
+			return glfwWindowShouldClose(window) == 1;
 		}
 		public static void SetWindowShouldClose(GlfwWindowPtr window, bool value) {
-			GlfwDelegates.glfwSetWindowShouldClose(window, value ? 1 : 0);
+			glfwSetWindowShouldClose(window, value ? 1 : 0);
 		}
 		public static void SetWindowTitle(GlfwWindowPtr window, string title) {
-			GlfwDelegates.glfwSetWindowTitle(window, title);
+			glfwSetWindowTitle(window, title);
 		}
 		public static void GetWindowPos(GlfwWindowPtr window, out int xpos, out int ypos) {
-			GlfwDelegates.glfwGetWindowPos(window, out xpos, out ypos);
+			glfwGetWindowPos(window, out xpos, out ypos);
 		}
 		public static void SetWindowPos(GlfwWindowPtr window, int xpos, int ypos) {
-			GlfwDelegates.glfwSetWindowPos(window, xpos, ypos);
+			glfwSetWindowPos(window, xpos, ypos);
 		}
 		public static void GetWindowSize(GlfwWindowPtr window, out int width, out int height) {
-			GlfwDelegates.glfwGetWindowSize(window, out width, out height);
+			glfwGetWindowSize(window, out width, out height);
 		}
 		public static void SetWindowSize(GlfwWindowPtr window, int width, int height) {
-			GlfwDelegates.glfwSetWindowSize(window, width, height);
+			glfwSetWindowSize(window, width, height);
 		}
 		public static void IconifyWindow(GlfwWindowPtr window) {
-			GlfwDelegates.glfwIconifyWindow(window);
+			glfwIconifyWindow(window);
 		}
 		public static void RestoreWindow(GlfwWindowPtr window) {
-			GlfwDelegates.glfwRestoreWindow(window);
+			glfwRestoreWindow(window);
 		}
 		public static void ShowWindow(GlfwWindowPtr window) {
-			GlfwDelegates.glfwShowWindow(window);
+			glfwShowWindow(window);
 		}
 		public static void HideWindow(GlfwWindowPtr window) {
-			GlfwDelegates.glfwHideWindow(window);
+			glfwHideWindow(window);
 		}
 		public static GlfwMonitorPtr GetWindowMonitor(GlfwWindowPtr window) {
-			return GlfwDelegates.glfwGetWindowMonitor(window);
+			return glfwGetWindowMonitor(window);
 		}
 		public static int GetWindowAttrib(GlfwWindowPtr window, WindowAttrib param) {
-			return GlfwDelegates.glfwGetWindowAttrib(window, (int)param);
+			return glfwGetWindowAttrib(window, (int)param);
 		}
 		public static int GetWindowAttrib(GlfwWindowPtr window, WindowHint param) {
-			return GlfwDelegates.glfwGetWindowAttrib(window, (int)param);
+			return glfwGetWindowAttrib(window, (int)param);
 		}
 		public static void SetWindowUserPointer(GlfwWindowPtr window, IntPtr pointer) {
-			GlfwDelegates.glfwSetWindowUserPointer(window, pointer);
+			glfwSetWindowUserPointer(window, pointer);
 		}
 		public static IntPtr GetWindowUserPointer(GlfwWindowPtr window) {
-			return GlfwDelegates.glfwGetWindowUserPointer(window);
+			return glfwGetWindowUserPointer(window);
 		}
 		private static GlfwFramebufferSizeFun framebufferSizeFun;
 		public static GlfwFramebufferSizeFun SetFramebufferSizeCallback(GlfwWindowPtr window, GlfwFramebufferSizeFun cbfun) {
 			framebufferSizeFun = cbfun;
-			return GlfwDelegates.glfwSetFramebufferSizeCallback(window, cbfun);
+			return glfwSetFramebufferSizeCallback(window, cbfun);
 		}
 		private static GlfwWindowPosFun windowPosFun;
 		public static GlfwWindowPosFun SetWindowPosCallback(GlfwWindowPtr window, GlfwWindowPosFun cbfun) {
 			windowPosFun = cbfun;
-			return GlfwDelegates.glfwSetWindowPosCallback(window, cbfun);
+			return glfwSetWindowPosCallback(window, cbfun);
 		}
 		private static GlfwWindowSizeFun windowSizeFun;
 		public static GlfwWindowSizeFun SetWindowSizeCallback(GlfwWindowPtr window, GlfwWindowSizeFun cbfun) {
 			windowSizeFun = cbfun;
-			return GlfwDelegates.glfwSetWindowSizeCallback(window, cbfun);
+			return glfwSetWindowSizeCallback(window, cbfun);
 		}
 		private static GlfwWindowCloseFun windowCloseFun;
 		public static GlfwWindowCloseFun SetWindowCloseCallback(GlfwWindowPtr window, GlfwWindowCloseFun cbfun) {
 			windowCloseFun = cbfun;
-			return GlfwDelegates.glfwSetWindowCloseCallback(window, cbfun);
+			return glfwSetWindowCloseCallback(window, cbfun);
 		}
 		private static GlfwWindowRefreshFun windowRefreshFun;
 		public static GlfwWindowRefreshFun SetWindowRefreshCallback(GlfwWindowPtr window, GlfwWindowRefreshFun cbfun) {
 			windowRefreshFun = cbfun;
-			return GlfwDelegates.glfwSetWindowRefreshCallback(window, cbfun);
+			return glfwSetWindowRefreshCallback(window, cbfun);
 		}
 		private static GlfwWindowFocusFun windowFocusFun;
 		public static GlfwWindowFocusFun SetWindowFocusCallback(GlfwWindowPtr window, GlfwWindowFocusFun cbfun) {
 			windowFocusFun = cbfun;
-			return GlfwDelegates.glfwSetWindowFocusCallback(window, cbfun);
+			return glfwSetWindowFocusCallback(window, cbfun);
 		}
 		private static GlfwWindowIconifyFun windowIconifyFun;
 		public static GlfwWindowIconifyFun SetWindowIconifyCallback(GlfwWindowPtr window, GlfwWindowIconifyFun cbfun) {
 			windowIconifyFun = cbfun;
-			return GlfwDelegates.glfwSetWindowIconifyCallback(window, cbfun);
+			return glfwSetWindowIconifyCallback(window, cbfun);
 		}
 		public static void PollEvents() {
-			GlfwDelegates.glfwPollEvents();
+			glfwPollEvents();
 		}
 		public static void WaitEvents() {
-			GlfwDelegates.glfwWaitEvents();
+			glfwWaitEvents();
 		}
 		public static int GetInputMode(GlfwWindowPtr window, InputMode mode) {
-			return GlfwDelegates.glfwGetInputMode(window, mode);
+			return glfwGetInputMode(window, mode);
 		}
 		public static void SetInputMode(GlfwWindowPtr window, InputMode mode, CursorMode value) {
-			GlfwDelegates.glfwSetInputMode(window, mode, value);
+			glfwSetInputMode(window, mode, value);
 		}
 		public static bool GetKey(GlfwWindowPtr window, Key key) {
-			return GlfwDelegates.glfwGetKey(window, key) != 0;
+			return glfwGetKey(window, key) != 0;
 		}
 		public static bool GetMouseButton(GlfwWindowPtr window, MouseButton button) {
-			return GlfwDelegates.glfwGetMouseButton(window, button) != 0;
+			return glfwGetMouseButton(window, button) != 0;
 		}
 		public static void GetCursorPos(GlfwWindowPtr window, out double xpos, out double ypos) {
-			GlfwDelegates.glfwGetCursorPos(window, out xpos, out ypos);
+			glfwGetCursorPos(window, out xpos, out ypos);
 		}
 		public static void SetCursorPos(GlfwWindowPtr window, double xpos, double ypos) {
-			GlfwDelegates.glfwSetCursorPos(window, xpos, ypos);
+			glfwSetCursorPos(window, xpos, ypos);
 		}
 		private static GlfwKeyFun keyFun;
 		public static GlfwKeyFun SetKeyCallback(GlfwWindowPtr window, GlfwKeyFun cbfun) {
 			keyFun = cbfun;
-			return GlfwDelegates.glfwSetKeyCallback(window, cbfun);
+			return glfwSetKeyCallback(window, cbfun);
 		}
 		private static GlfwCharFun charFun;
 		public static GlfwCharFun SetCharCallback(GlfwWindowPtr window, GlfwCharFun cbfun) {
 			charFun = cbfun;
-			return GlfwDelegates.glfwSetCharCallback(window, cbfun);
+			return glfwSetCharCallback(window, cbfun);
 		}
 		private static GlfwMouseButtonFun mouseButtonFun;
 		public static GlfwMouseButtonFun SetMouseButtonCallback(GlfwWindowPtr window, GlfwMouseButtonFun cbfun) {
 			mouseButtonFun = cbfun;
-			return GlfwDelegates.glfwSetMouseButtonCallback(window, cbfun);
+			return glfwSetMouseButtonCallback(window, cbfun);
 		}
 		private static GlfwCursorPosFun cursorPosFun;
 		public static GlfwCursorPosFun SetCursorPosCallback(GlfwWindowPtr window, GlfwCursorPosFun cbfun) {
 			cursorPosFun = cbfun;
-			return GlfwDelegates.glfwSetCursorPosCallback(window, cbfun);
+			return glfwSetCursorPosCallback(window, cbfun);
 		}
 		private static GlfwCursorEnterFun cursorEnterFun;
 		public static GlfwCursorEnterFun SetCursorEnterCallback(GlfwWindowPtr window, GlfwCursorEnterFun cbfun) {
 			cursorEnterFun = cbfun;
-			return GlfwDelegates.glfwSetCursorEnterCallback(window, cbfun);
+			return glfwSetCursorEnterCallback(window, cbfun);
 		}
 		private static GlfwScrollFun scrollFun;
 		public static GlfwScrollFun SetScrollCallback(GlfwWindowPtr window, GlfwScrollFun cbfun) {
 			scrollFun = cbfun;
-			return GlfwDelegates.glfwSetScrollCallback(window, cbfun);
+			return glfwSetScrollCallback(window, cbfun);
 		}
 		public static bool JoystickPresent(Joystick joy) {
-			return GlfwDelegates.glfwJoystickPresent(joy) == 1;
+			return glfwJoystickPresent(joy) == 1;
 		}
 		public static float[] GetJoystickAxes(Joystick joy) {
 			int numaxes;
-			float * axes = GlfwDelegates.glfwGetJoystickAxes(joy, out numaxes);
+			float * axes = glfwGetJoystickAxes(joy, out numaxes);
 			float[] result = new float[numaxes];
 			for (int i = 0; i < numaxes; ++i) {
 				result[i] = axes[i];
@@ -278,7 +277,7 @@ namespace Pencil.Gaming {
 		}
 		public static byte[] GetJoystickButtons(Joystick joy) {
 			int numbuttons;
-			byte * buttons = GlfwDelegates.glfwGetJoystickButtons(joy, out numbuttons);
+			byte * buttons = glfwGetJoystickButtons(joy, out numbuttons);
 			byte[] result = new byte[numbuttons];
 			for (int i = 0; i < numbuttons; ++i) {
 				result[i] = buttons[i];
@@ -286,41 +285,39 @@ namespace Pencil.Gaming {
 			return result;
 		}
 		public static string GetJoystickName(Joystick joy) {
-			return new string(GlfwDelegates.glfwGetJoystickName(joy));
+			return new string(glfwGetJoystickName(joy));
 		}
 		public static void SetClipboardString(GlfwWindowPtr window, string @string) {
-			GlfwDelegates.glfwSetClipboardString(window,  @string);
+			glfwSetClipboardString(window,  @string);
 		}
 		public static string GetClipboardString(GlfwWindowPtr window) {
-			return new string(GlfwDelegates.glfwGetClipboardString(window));
+			return new string(glfwGetClipboardString(window));
 		}
 		public static double GetTime() {
-			return GlfwDelegates.glfwGetTime();
+			return glfwGetTime();
 		}
 		public static void SetTime(double time) {
-			GlfwDelegates.glfwSetTime(time);
+			glfwSetTime(time);
 		}
 		public static void MakeContextCurrent(GlfwWindowPtr window) {
-			GlfwDelegates.glfwMakeContextCurrent(window);
+			glfwMakeContextCurrent(window);
 		}
 		public static GlfwWindowPtr GetCurrentContext() {
-			return GlfwDelegates.glfwGetCurrentContext();
+			return glfwGetCurrentContext();
 		}
 		public static void SwapBuffers(GlfwWindowPtr window) {
-			GlfwDelegates.glfwSwapBuffers(window);
+			glfwSwapBuffers(window);
 		}
 		public static void SwapInterval(int interval) {
-			GlfwDelegates.glfwSwapInterval(interval);
+			glfwSwapInterval(interval);
 		}
 		public static bool ExtensionSupported(string extension) {
-			return GlfwDelegates.glfwExtensionSupported(extension) == 1;
+			return glfwExtensionSupported(extension) == 1;
 		}
 		public static IntPtr GetProcAddress(string procname) {
-			return GlfwDelegates.glfwGetProcAddress(procname);
+			return glfwGetProcAddress(procname);
 		}
 
 		#pragma warning restore 0414
 	}
 }
-
-#endif

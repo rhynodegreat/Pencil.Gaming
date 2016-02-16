@@ -21,7 +21,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if USE_GLFW3
 
 namespace Pencil.Gaming {
 
@@ -281,5 +280,3 @@ namespace Pencil.Gaming {
 		Disconnected,
 	}
 }
-
-#endif

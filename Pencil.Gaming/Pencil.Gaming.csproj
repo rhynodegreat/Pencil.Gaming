@@ -75,7 +75,7 @@
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Core-GLFW3</OutputPath>
-    <DefineConstants>USE_GL_CORE; USE_GLFW3;</DefineConstants>
+    <DefineConstants>USE_GL_CORE;</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CustomCommands>
@@ -115,17 +115,8 @@
     <None Include="Math\OLD_Matrix4x4.cs" />
     <Compile Include="Graphics\GlEnums.cs" />
     <Compile Include="Graphics\AssetLoadException.cs" />
-    <Compile Include="Glfw\Glfw2.cs" />
     <Compile Include="Glfw\Glfw3.cs" />
-    <Compile Include="Glfw\Glfw2_32.cs" />
-    <Compile Include="Glfw\Glfw2_64.cs" />
-    <Compile Include="Glfw\Glfw3_32.cs" />
-    <Compile Include="Glfw\Glfw3_64.cs" />
-    <Compile Include="Glfw\Glfw2Delegates.cs" />
-    <Compile Include="Glfw\Glfw2DelegateTypes.cs" />
-    <Compile Include="Glfw\Glfw2Enum.cs" />
-    <Compile Include="Glfw\Glfw2Structs.cs" />
-    <Compile Include="Glfw\Glfw3Delegates.cs" />
+    <Compile Include="Glfw\Glfw3_Native.cs" />
     <Compile Include="Glfw\Glfw3DelegateTypes.cs" />
     <Compile Include="Glfw\Glfw3Enum.cs" />
     <Compile Include="Glfw\Glfw3Structs.cs" />
@@ -145,10 +136,8 @@
     <Compile Include="Scripting\LuaLMacroFunctions.cs" />
     <Compile Include="Audio\Sound.cs" />
     <Compile Include="Audio\Listener.cs" />
-    <Compile Include="Glfw\Glfw2KeyboardState.cs" />
-    <Compile Include="Glfw\Glfw2MouseState.cs" />
-    <Compile Include="Glfw\Glfw3KeyboardState.cs" />
-    <Compile Include="Glfw\Glfw3MouseState.cs" />
+    <None Include="Glfw\Glfw3KeyboardState.cs" />
+    <None Include="Glfw\Glfw3MouseState.cs" />
     <Compile Include="Math\Vector3i.cs" />
     <Compile Include="Math\Vector2i.cs" />
     <Compile Include="Math\Vector4i.cs" />
@@ -177,51 +166,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LICENSE.TXT" />
-    <None Include="natives32-glfw2\openal32.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\wrap_oal.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\libopenal.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\glfw.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\libglfw.dylib">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\libglfw.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\libopenal.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\wrap_oal.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\openal32.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\libglfw.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\glfw.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\GLFW_LINUX_BROKEN.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\libopenal.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\openal32.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\wrap_oal.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="natives64-glfw3\glfw.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -237,34 +181,7 @@
     <None Include="natives64-glfw3\wrap_oal.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="natives64-glfw2\glfw.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\liblua.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="natives64-glfw3\liblua.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\lua.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\liblua.dylib">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw2\liblua.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\liblua.dylib">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\liblua.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives32-glfw3\lua.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="natives64-glfw2\lua.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="natives64-glfw3\lua.dll">
