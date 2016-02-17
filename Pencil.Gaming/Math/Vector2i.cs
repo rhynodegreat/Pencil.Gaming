@@ -25,7 +25,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
-namespace Pencil.Gaming.MathUtils {
+namespace Pencil.Gaming.Math {
 	/// <summary>Represents a 2D vector using two single-precision inting-point numbers.</summary>
 	/// <remarks>
 	/// The Vector2i structure is suitable for interoperation with unmanaged code requiring two consecutive ints.

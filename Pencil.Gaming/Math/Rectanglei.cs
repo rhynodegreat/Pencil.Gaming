@@ -1,7 +1,7 @@
 using System;
-using Pencil.Gaming.MathUtils;
+using Pencil.Gaming.Math;
 
-namespace Pencil.Gaming.MathUtils {
+namespace Pencil.Gaming.Math {
 	public struct Rectanglei {
 		public int X, Y, Width, Height;
 		public Vector2i Position {

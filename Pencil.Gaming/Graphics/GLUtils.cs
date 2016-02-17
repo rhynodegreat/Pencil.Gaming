@@ -30,7 +30,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
-using Pencil.Gaming.MathUtils;
+using Pencil.Gaming.Math;
 
 namespace Pencil.Gaming.Graphics {
 	public delegate T[] TArrayFromRetrievedData<T>(Vector4[] vertexs,Vector3[] normals,Vector2[] texCoords);
@@ -199,8 +199,8 @@ namespace Pencil.Gaming.Graphics {
 
 				for (int i = 0; i <= lod; ++i) {
 					float rad = (i / (float)lod) * MathHelper.Tau;
-					float xNorm = (float)Math.Cos(rad);
-					float zNorm = (float)Math.Sin(rad);
+					float xNorm = (float)System.Math.Cos(rad);
+					float zNorm = (float)System.Math.Sin(rad);
 					float xVert = xNorm * radius;
 					float zVert = zNorm * radius;
 

@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pencil.Gaming.MathUtils {
+namespace Pencil.Gaming.Math {
 	/// <summary>
 	/// Contains common mathematical functions and constants.
 	/// </summary>

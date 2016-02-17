@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Diagnostics;
 using System.Reflection.Emit;
-using Pencil.Gaming.MathUtils;
+using Pencil.Gaming.Math;
 using System.Numerics;
 
 #endregion

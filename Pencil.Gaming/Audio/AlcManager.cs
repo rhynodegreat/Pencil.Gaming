@@ -38,32 +38,19 @@ namespace Pencil.Gaming.Audio {
 		private delegate bool MakeContextCurrent(IntPtr hndl);
 
 		public AlcManager() {
-#if DEBUG
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
-#endif
 			CloseDevice alcCloseDevice = null;
 			OpenDevice alcOpenDevice = null;
 			IsExtensionPresent alcIsExtensionPresent = null;
 			GetIntegerv alcGetIntegerv = null;
 			CreateContext alcCreateContext = null;
 			MakeContextCurrent alcMakeContextCurrent = null;
-
-			if (IntPtr.Size == 8) {
-				alcCloseDevice = Alc64.alcCloseDevice;
-				alcOpenDevice = Alc64.alcOpenDevice;
-				alcIsExtensionPresent = Alc64.alcIsExtensionPresent;
-				alcGetIntegerv = Alc64.alcGetIntegerv;
-				alcCreateContext = Alc64.alcCreateContext;
-				alcMakeContextCurrent = Alc64.alcMakeContextCurrent;
-			} else {
-				alcCloseDevice = Alc32.alcCloseDevice;
-				alcOpenDevice = Alc32.alcOpenDevice;
-				alcIsExtensionPresent = Alc32.alcIsExtensionPresent;
-				alcGetIntegerv = Alc32.alcGetIntegerv;
-				alcCreateContext = Alc32.alcCreateContext;
-				alcMakeContextCurrent = Alc32.alcMakeContextCurrent;
-			}
+            
+			alcCloseDevice = Alc64.alcCloseDevice;
+			alcOpenDevice = Alc64.alcOpenDevice;
+			alcIsExtensionPresent = Alc64.alcIsExtensionPresent;
+			alcGetIntegerv = Alc64.alcGetIntegerv;
+			alcCreateContext = Alc64.alcCreateContext;
+			alcMakeContextCurrent = Alc64.alcMakeContextCurrent;
 
 			alcDeviceHandle = alcOpenDevice(null);
 			if (alcDeviceHandle == IntPtr.Zero) {
@@ -96,11 +83,7 @@ namespace Pencil.Gaming.Audio {
 		}
 
 		~AlcManager() {
-			if (IntPtr.Size == 8) {
-				Alc64.alcCloseDevice(alcDeviceHandle);
-			} else {
-				Alc32.alcCloseDevice(alcDeviceHandle);
-			}
+			Alc64.alcCloseDevice(alcDeviceHandle);
 		}
 	}
 }

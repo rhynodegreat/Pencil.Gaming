@@ -24,35 +24,37 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Pencil.Gaming {
+using Pencil.Gaming.Input;
+
+namespace Pencil.Gaming.GLFW {
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public delegate void GlfwErrorFun(GlfwError code,[MarshalAs(UnmanagedType.LPStr)] string desc);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwMonitorFun(GlfwMonitorPtr mtor,ConnectionState @enum);
+	public delegate void GlfwMonitorFun(MonitorPtr mtor,ConnectionState @enum);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowCloseFun(GlfwWindowPtr wnd);
+	public delegate void GlfwWindowCloseFun(WindowPtr wnd);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowPosFun(GlfwWindowPtr wnd,int x,int y);
+	public delegate void GlfwWindowPosFun(WindowPtr wnd,int x,int y);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowRefreshFun(GlfwWindowPtr wnd);
+	public delegate void GlfwWindowRefreshFun(WindowPtr wnd);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowSizeFun(GlfwWindowPtr wnd,int width,int height);
+	public delegate void GlfwWindowSizeFun(WindowPtr wnd,int width,int height);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowFocusFun(GlfwWindowPtr wnd,bool focus);
+	public delegate void GlfwWindowFocusFun(WindowPtr wnd,bool focus);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwKeyFun(GlfwWindowPtr wnd,Key key,int scanCode,KeyAction action,KeyModifiers mods);
+	public delegate void GlfwKeyFun(WindowPtr wnd,Key key,int scanCode,KeyAction action,KeyModifiers mods);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwCharFun(GlfwWindowPtr wnd,char ch);
+	public delegate void GlfwCharFun(WindowPtr wnd,char ch);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwMouseButtonFun(GlfwWindowPtr wnd,MouseButton btn,KeyAction action);
+	public delegate void GlfwMouseButtonFun(WindowPtr wnd,MouseButton btn,KeyAction action);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwWindowIconifyFun(GlfwWindowPtr wnd,bool iconify);
+	public delegate void GlfwWindowIconifyFun(WindowPtr wnd,bool iconify);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwCursorPosFun(GlfwWindowPtr wnd,double x,double y);
+	public delegate void GlfwCursorPosFun(WindowPtr wnd,double x,double y);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwCursorEnterFun(GlfwWindowPtr wnd,bool enter);
+	public delegate void GlfwCursorEnterFun(WindowPtr wnd,bool enter);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwScrollFun(GlfwWindowPtr wnd,double xoffset,double yoffset);
+	public delegate void GlfwScrollFun(WindowPtr wnd,double xoffset,double yoffset);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void GlfwFramebufferSizeFun(GlfwWindowPtr wnd,int width,int height);
+	public delegate void GlfwFramebufferSizeFun(WindowPtr wnd,int width,int height);
 }

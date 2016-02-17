@@ -24,80 +24,77 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Pencil.Gaming {
-	[StructLayout(LayoutKind.Explicit, Size = sizeof(int) * 6)]
-	public struct GlfwVidMode {
-		[FieldOffset(sizeof(int) * 0)]
+namespace Pencil.Gaming.GLFW {
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public struct VideoMode {
 		public int
 			Width;
-		[FieldOffset(sizeof(int) * 1)]
 		public int
 			Height;
-		[FieldOffset(sizeof(int) * 2)]
 		public int
 			RedBits;
-		[FieldOffset(sizeof(int) * 3)]
 		public int
 			BlueBits;
-		[FieldOffset(sizeof(int) * 4)]
 		public int
 			GreenBits;
-		[FieldOffset(sizeof(int) * 5)]
 		public int
 			RefreshRate;
 	}
 
-	[StructLayout(LayoutKind.Sequential)]
-	internal unsafe struct GlfwGammaRampInternal {
-		public uint* Red;
-		public uint* Green;
-		public uint* Blue;
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	internal struct GammaRampInternal {
+        public IntPtr Red, Blue, Green;
 		public uint Length;
 	}
 
-	[StructLayout(LayoutKind.Sequential)]
-	public struct GlfwGammaRamp {
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public struct GammaRamp {
 		[MarshalAs(UnmanagedType.LPArray)]
-		public uint[] Red;
+		public short[] Red;
 		[MarshalAs(UnmanagedType.LPArray)]
-		public uint[] Green;
+		public short[] Green;
 		[MarshalAs(UnmanagedType.LPArray)]
-		public uint[] Blue;
+		public short[] Blue;
 		internal uint Length;
+
+        internal GammaRamp(uint length) {
+            Red = new short[length];
+            Green = new short[length];
+            Blue = new short[length];
+            Length = length;
+        }
 	}
 
 	#pragma warning disable 0414
 
-	[StructLayout(LayoutKind.Explicit)]
-	public struct GlfwMonitorPtr {
-		private GlfwMonitorPtr(IntPtr ptr) {
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public struct MonitorPtr {
+		private MonitorPtr(IntPtr ptr) {
 			inner_ptr = ptr;
 		}
-
-		[FieldOffsetAttribute(0)]
+        
 		private IntPtr
 			inner_ptr;
 
-		public readonly static GlfwMonitorPtr Null = new GlfwMonitorPtr(IntPtr.Zero);
+		public readonly static MonitorPtr Null = new MonitorPtr(IntPtr.Zero);
 	}
 
-	[StructLayout(LayoutKind.Explicit)]
-	public struct GlfwWindowPtr {
-		private GlfwWindowPtr(IntPtr ptr) {
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public struct WindowPtr {
+		private WindowPtr(IntPtr ptr) {
 			inner_ptr = ptr;
 		}
 
-		[FieldOffsetAttribute(0)]
 		private IntPtr
 			inner_ptr;
 
-		public readonly static GlfwWindowPtr Null = new GlfwWindowPtr(IntPtr.Zero);
+		public readonly static WindowPtr Null = new WindowPtr(IntPtr.Zero);
 
-        public static bool operator == (GlfwWindowPtr a, GlfwWindowPtr b) {
+        public static bool operator == (WindowPtr a, WindowPtr b) {
             return a.inner_ptr == b.inner_ptr;
         }
 
-        public static bool operator !=(GlfwWindowPtr a, GlfwWindowPtr b) {
+        public static bool operator !=(WindowPtr a, WindowPtr b) {
             return a.inner_ptr != b.inner_ptr;
         }
 
@@ -106,8 +103,8 @@ namespace Pencil.Gaming {
         }
 
         public override bool Equals(object obj) {
-            if (obj is GlfwWindowPtr) {
-                GlfwWindowPtr other = (GlfwWindowPtr)obj;
+            if (obj is WindowPtr) {
+                WindowPtr other = (WindowPtr)obj;
                 return this == other;
             }
             return false;

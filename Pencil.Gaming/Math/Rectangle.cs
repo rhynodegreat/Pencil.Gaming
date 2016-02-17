@@ -1,9 +1,7 @@
 using System;
 using System.Numerics;
 
-using Pencil.Gaming.MathUtils;
-
-namespace Pencil.Gaming.MathUtils {
+namespace Pencil.Gaming.Math {
 	public struct Rectangle {
 		public float X, Y, Width, Height;
 		public Vector2 Position {

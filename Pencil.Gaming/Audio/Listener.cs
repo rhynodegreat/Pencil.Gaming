@@ -25,7 +25,7 @@ using System;
 using System.Numerics;
 
 using Pencil.Gaming.Audio;
-using Pencil.Gaming.MathUtils;
+using Pencil.Gaming.Math;
 
 namespace Pencil.Gaming.Audio {
 	public class Listener {

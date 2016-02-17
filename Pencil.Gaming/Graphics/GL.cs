@@ -27,6 +27,8 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
+using Pencil.Gaming.GLFW;
+
 namespace Pencil.Gaming.Graphics {
 	#pragma warning disable 3019
 	#pragma warning disable 1591
@@ -35,12 +37,7 @@ namespace Pencil.Gaming.Graphics {
 	#pragma warning disable 3006
 
 	public static partial class GL {
-		static GL() {
-#if DEBUG
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
-#endif
-            
+		public static void LoadFunctions() {            
 			IntPtr bindBuffer = Glfw.GetProcAddress("glBindBuffer");
 			if (bindBuffer == IntPtr.Zero) {
 				throw new GLLoadException();
@@ -60,10 +57,6 @@ namespace Pencil.Gaming.Graphics {
 					}
 				}
 			}
-#if DEBUG
-			sw.Stop();
-			Console.WriteLine("Loading OpenGL functions took {0} milliseconds", sw.ElapsedMilliseconds);
-#endif
 		}
 
         // --------- Manual added functions ---------

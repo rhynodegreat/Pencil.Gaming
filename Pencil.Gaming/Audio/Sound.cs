@@ -26,7 +26,7 @@ using System.IO;
 using System.Numerics;
 
 using Pencil.Gaming.Audio;
-using Pencil.Gaming.MathUtils;
+using Pencil.Gaming.Math;
 
 namespace Pencil.Gaming.Audio {
 	public class Sound : IDisposable {
@@ -44,16 +44,16 @@ namespace Pencil.Gaming.Audio {
 			}
 		}
 
-		public Sound(Stream file, string extension) {
+		public Sound(Stream stream, string extension) {
 			switch (extension) {
 			case "wav":
 				using (MemoryStream ms = new MemoryStream()) {
-					if (!file.CanRead) {
+					if (!stream.CanRead) {
 						throw new NotSupportedException("This stream does not support reading");
 					}
 					byte[] buffer = new byte[16 * 1024];
 					int nread;
-					while ((nread = file.Read(buffer, 0, 16 * 1024)) != 0) {
+					while ((nread = stream.Read(buffer, 0, 16 * 1024)) != 0) {
 						ms.Write(buffer, 0, nread);
 					}
 
@@ -61,7 +61,7 @@ namespace Pencil.Gaming.Audio {
 				}
 				break;
 			case "ogg":
-				LoadOgg(file);
+				LoadOgg(stream);
 				break;
 			default:
 				throw new NotSupportedException("Audio format not supported: " + extension);
@@ -130,9 +130,9 @@ namespace Pencil.Gaming.Audio {
 			AL.DeleteSources(1, ref SourceHandle);
 		}
 
-		public TimeSpan Length {
+		public float Length {
 			get {
-				return new TimeSpan(0, 0, 0, (int)lengthSeconds);
+				return lengthSeconds;
 			}
 		}
 		public bool Looping { 
