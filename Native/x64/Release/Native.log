@@ -1,0 +1,57 @@
+﻿  cocoa_time.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  context.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  egl_context.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  glx_context.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  init.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  input.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  linux_joystick.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  mir_init.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  mir_monitor.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  mir_window.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  monitor.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  posix_time.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  posix_tls.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  wgl_context.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_init.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_joystick.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_monitor.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_time.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_tls.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_window.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  Compiling...
+  window.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_init.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_monitor.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_window.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_init.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_monitor.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_window.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"
+  xkb_unicode.c
+c:\users\ryan\documents\github\glfw\src\internal.h(101): fatal error C1189: #error:  "No supported window creation API selected"

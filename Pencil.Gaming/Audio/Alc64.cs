@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 
 namespace Pencil.Gaming.Audio {
 	internal static class Alc64 {
-		private const string lib = "natives64/openal32.dll";
+		private const string lib = "openal32";
 
 		[DllImport(Alc64.lib)]
 		internal static extern bool alcCloseDevice(IntPtr device);

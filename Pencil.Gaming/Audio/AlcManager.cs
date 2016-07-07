@@ -38,43 +38,29 @@ namespace Pencil.Gaming.Audio {
 		private delegate bool MakeContextCurrent(IntPtr hndl);
 
 		public AlcManager() {
-			CloseDevice alcCloseDevice = null;
-			OpenDevice alcOpenDevice = null;
-			IsExtensionPresent alcIsExtensionPresent = null;
-			GetIntegerv alcGetIntegerv = null;
-			CreateContext alcCreateContext = null;
-			MakeContextCurrent alcMakeContextCurrent = null;
-            
-			alcCloseDevice = Alc64.alcCloseDevice;
-			alcOpenDevice = Alc64.alcOpenDevice;
-			alcIsExtensionPresent = Alc64.alcIsExtensionPresent;
-			alcGetIntegerv = Alc64.alcGetIntegerv;
-			alcCreateContext = Alc64.alcCreateContext;
-			alcMakeContextCurrent = Alc64.alcMakeContextCurrent;
-
-			alcDeviceHandle = alcOpenDevice(null);
+			alcDeviceHandle = Alc64.alcOpenDevice(null);
 			if (alcDeviceHandle == IntPtr.Zero) {
 				// TODO: Named devices
 				throw new Exception("Could not find audio device.");
 			}
 
 			List<int> attributes = new List<int> { 4105, 0, };
-			if (alcIsExtensionPresent(alcDeviceHandle, "ALC_EXT_EFX")) {
+			if (Alc64.alcIsExtensionPresent(alcDeviceHandle, "ALC_EXT_EFX")) {
 				int[] alcInteger = new int[1];
-				alcGetIntegerv(alcDeviceHandle, 131065, 1, alcInteger);
+                Alc64.alcGetIntegerv(alcDeviceHandle, 131065, 1, alcInteger);
 				attributes.Add(131065);
 				attributes.Add(alcInteger[0]);
 			}
 			attributes.Add(0);
 
-			alcContextHandle = alcCreateContext(alcDeviceHandle, attributes.ToArray());
+			alcContextHandle = Alc64.alcCreateContext(alcDeviceHandle, attributes.ToArray());
 
 			if (alcContextHandle == IntPtr.Zero) {
-				alcCloseDevice(alcDeviceHandle);
+                Alc64.alcCloseDevice(alcDeviceHandle);
 				throw new Exception("Failed to create ALC context.");
 			}
 
-			alcMakeContextCurrent(alcContextHandle);
+            Alc64.alcMakeContextCurrent(alcContextHandle);
 
 #if DEBUG
 			sw.Stop();
@@ -82,7 +68,7 @@ namespace Pencil.Gaming.Audio {
 #endif
 		}
 
-		~AlcManager() {
+		public void Close() {
 			Alc64.alcCloseDevice(alcDeviceHandle);
 		}
 	}

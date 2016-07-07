@@ -30,6 +30,8 @@ using static Pencil.Gaming.GLFW.Glfw_Native;
 
 namespace Pencil.Gaming.GLFW {
 	public static partial class Glfw {
+		private static GlfwErrorFun errorCallback;
+
 		public static bool Init() {
 			return glfwInit() == 1;
 		}
@@ -42,7 +44,6 @@ namespace Pencil.Gaming.GLFW {
 		public static string GetVersionString() {
 			return Marshal.PtrToStringAnsi(glfwGetVersionString());
 		}
-		private static GlfwErrorFun errorCallback;
 		public static GlfwErrorFun SetErrorCallback(GlfwErrorFun cbfun) {
 			errorCallback = cbfun;
 			return glfwSetErrorCallback(cbfun);
@@ -87,17 +88,18 @@ namespace Pencil.Gaming.GLFW {
 		public static void SetGamma(MonitorPtr monitor, float gamma) {
 			glfwSetGamma(monitor, gamma);
 		}
-		public static void GetGammaRamp(MonitorPtr monitor, out GammaRamp ramp) {
+		public static GammaRamp GetGammaRamp(MonitorPtr monitor) {
 			GammaRampInternal rampI;
 			glfwGetGammaRamp(monitor, out rampI);
 			uint length = rampI.Length;
-			ramp = new GammaRamp(length);
+			GammaRamp ramp = new GammaRamp(length);
 			for (int i = 0; i < ramp.Red.Length; ++i) {
                 int offset = i * sizeof(ushort);
                 ramp.Red[i] = Marshal.PtrToStructure<short>(rampI.Red + offset);
 				ramp.Green[i] = Marshal.PtrToStructure<short>(rampI.Green + offset);
                 ramp.Blue[i] = Marshal.PtrToStructure<short>(rampI.Blue + offset);
             }
+            return ramp;
 		}
 		public static void SetGammaRamp(MonitorPtr monitor, ref GammaRamp ramp) {
 			ramp.Length = (uint)ramp.Red.Length;

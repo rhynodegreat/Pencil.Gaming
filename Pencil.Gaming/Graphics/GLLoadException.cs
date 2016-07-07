@@ -25,8 +25,7 @@ using System;
 
 namespace Pencil.Gaming.Graphics {
 	public class GLLoadException : Exception {
-		public GLLoadException() : base("Cannot load OpenGL functions, no current context." +
-										"Please open a window before loading/using any OpenGL functions.") {
+		public GLLoadException(string message) : base(message) {
 		}
 	}
 }

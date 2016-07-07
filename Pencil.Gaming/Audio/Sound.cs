@@ -73,7 +73,7 @@ namespace Pencil.Gaming.Audio {
 			ALFormat format;
 			uint chunkSize, sampleRate, avgBytesPerSec;
 			ushort bytesPerSample, bitsPerSample;
-			AL.Utils.LoadWavExt(wave, out data, out chunkSize, out format, out sampleRate, out avgBytesPerSec, out bytesPerSample, out bitsPerSample);
+			Utils.LoadWavExt(wave, out data, out chunkSize, out format, out sampleRate, out avgBytesPerSec, out bytesPerSample, out bitsPerSample);
 
 			Load(data, format, sampleRate, TimeSpan.FromSeconds(data.Length / (float)avgBytesPerSec));
 		}
@@ -83,7 +83,7 @@ namespace Pencil.Gaming.Audio {
 			ALFormat format;
 			uint sampleRate;
 			TimeSpan len;
-			AL.Utils.LoadOgg(ogg, out data, out format, out sampleRate, out len);
+			Utils.LoadOgg(ogg, out data, out format, out sampleRate, out len);
 
 			Load(data, format, sampleRate, len);
 		}
@@ -93,7 +93,7 @@ namespace Pencil.Gaming.Audio {
 			ALFormat format;
 			uint sampleRate;
 			TimeSpan len;
-			AL.Utils.LoadOgg(ogg, out data, out format, out sampleRate, out len);
+			Utils.LoadOgg(ogg, out data, out format, out sampleRate, out len);
 
 			Load(data, format, sampleRate, len);
 		}

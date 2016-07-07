@@ -28,10 +28,28 @@ using static Pencil.Gaming.Audio.AL_Native;
 
 namespace Pencil.Gaming.Audio {
 	public static partial class AL {
-		private static AlcManager manager;
+        private static IntPtr alcDeviceHandle;
+        private static IntPtr alcContextHandle;
 
         public static void Init() {
-            manager = new AlcManager();
+            alcDeviceHandle = alcOpenDevice(null);
+            if (alcDeviceHandle == IntPtr.Zero) {
+                // TODO: Named devices
+                throw new Exception("Could not find audio device.");
+            }
+
+            alcContextHandle = alcCreateContext(alcDeviceHandle, null);
+
+            if (alcContextHandle == IntPtr.Zero) {
+                alcCloseDevice(alcDeviceHandle);
+                throw new Exception("Failed to create ALC context.");
+            }
+
+            alcMakeContextCurrent(alcContextHandle);
+        }
+
+        public static void Terminate() {
+            alcCloseDevice(alcDeviceHandle);
         }
 
 		public static void Enable(ALCapability capability) {

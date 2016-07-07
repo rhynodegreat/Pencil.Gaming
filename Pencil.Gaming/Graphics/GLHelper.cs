@@ -364,7 +364,7 @@ namespace Pencil.Gaming.Graphics {
 
 		#region public static string GetShaderInfoLog(Int32 shader)
 
-		public static string GetShaderInfoLog(Int32 shader) {
+		public static string GetShaderInfoLog(UInt32 shader) {
 			string info;
 			GetShaderInfoLog(shader, out info);
 			return info;
@@ -374,7 +374,7 @@ namespace Pencil.Gaming.Graphics {
 
 		#region public static void GetShaderInfoLog(Int32 shader, out string info)
 
-		public static void GetShaderInfoLog(Int32 shader, out string info) {
+		public static void GetShaderInfoLog(UInt32 shader, out string info) {
 			unsafe {
 				int length;
 				GL.GetShader(shader, ShaderParameter.InfoLogLength, out length);
@@ -383,7 +383,7 @@ namespace Pencil.Gaming.Graphics {
 					return;
 				}
 				StringBuilder sb = new StringBuilder(length * 2);
-				GL.GetShaderInfoLog((UInt32)shader, sb.Capacity, &length, sb);
+				GL.GetShaderInfoLog(shader, sb.Capacity, &length, sb);
 				info = sb.ToString();
 			}
 		}
@@ -392,7 +392,7 @@ namespace Pencil.Gaming.Graphics {
 
 		#region public static string GetProgramInfoLog(Int32 program)
 
-		public static string GetProgramInfoLog(Int32 program) {
+		public static string GetProgramInfoLog(UInt32 program) {
 			string info;
 			GetProgramInfoLog(program, out info);
 			return info;
@@ -402,7 +402,7 @@ namespace Pencil.Gaming.Graphics {
 
 		#region public static void GetProgramInfoLog(Int32 program, out string info)
 
-		public static void GetProgramInfoLog(Int32 program, out string info) {
+		public static void GetProgramInfoLog(UInt32 program, out string info) {
 			unsafe {
 				int length;
 				GL.GetProgram(program, Pencil.Gaming.Graphics.ProgramParameter.InfoLogLength, out length);
